@@ -1,11 +1,13 @@
+import { Dispatch } from "react";
 import type { Guitar } from "../types";
+import { CartActions } from "../reducers/cart-reducer";
 
 type GuitarProps = {
     guitar : Guitar, 
-    addToCart : (item: Guitar) => void
+    dispatch: Dispatch<CartActions>
 }
 
-const Guitar = ({guitar, addToCart} : GuitarProps) => {
+const Guitar = ({guitar, dispatch} : GuitarProps) => {
 
     const {name, price, image, description } = guitar;
 
@@ -22,7 +24,7 @@ const Guitar = ({guitar, addToCart} : GuitarProps) => {
                 <button 
                     type="button"
                     className="btn btn-dark w-100"
-                    onClick={() => addToCart(guitar)}
+                    onClick={() => dispatch({type: 'add-to-cart', payload: {item: guitar}})}
                     // onClick={() => setCart([...cart, guitar])}
                     //en vez de crear una funcion lo mando a llamar una vez en el onClick
                     // setCart es para ponerlo en el carrito "...cart" hago una copia de lo que ya habia en el state y "guitar" es la nueva guitarra  
